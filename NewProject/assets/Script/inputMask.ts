@@ -1,4 +1,4 @@
-import Character,{ITouchEvent} from "./Character";
+import CharacterBase,{ITouchEvent} from "./CharacterBase";
 
 // Learn TypeScript:
 //  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/typescript.html
@@ -20,8 +20,8 @@ export default class InputMask extends cc.Component {
 
     @property(cc.Canvas)
     canvas:cc.Canvas = null;
-    @property({type:Character})
-    player:Character = null;
+    @property({type:CharacterBase})
+    player:CharacterBase = null;
     @property(cc.Node)
     controlPoint:cc.Node = null;
     private _zoom:number = 0;
@@ -33,7 +33,6 @@ export default class InputMask extends cc.Component {
     // LIFE-CYCLE CALLBACKS:
     isTouch:boolean = false;
     TouchPosition:cc.Vec2 = cc.v2(0,0);
-    private 
     private static _Instantiation:InputMask = null;
     
     public static get Instantiation() : InputMask {
@@ -65,7 +64,7 @@ export default class InputMask extends cc.Component {
     endTouchFun()
     {
         this.isTouch = false;
-        this.player.endTouch();
+        this.player.endTouch(this.node);
     }
      mainCamera:cc.Camera = null;
      update (dt:Number) 

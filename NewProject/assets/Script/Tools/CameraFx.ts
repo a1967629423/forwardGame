@@ -12,12 +12,11 @@ import GlobalTime, { CoroutinesType } from "./GlobalTime";
 //  - [English] http://www.cocos2d-x.org/docs/creator/manual/en/scripting/life-cycle-callbacks.html
 
 const { ccclass, property } = cc._decorator;
-
+/**
+ * 控制Camera，完成跟踪等功能
+ */
 @ccclass
 export default class CameraFx extends cc.Component {
-
-    @property(cc.Label)
-    label: cc.Label = null;
     @property(cc.Camera)
     tagerCamera: cc.Camera = null;
     @property(cc.Node)
@@ -26,13 +25,27 @@ export default class CameraFx extends cc.Component {
     roundMin:cc.Vec2 = cc.v2(0,0);
     @property(cc.Vec2)
     roundMax:cc.Vec2 = cc.v2(0,0);
+    /**
+     * 只向上跟踪
+     */
     @property
     goforward:boolean = false;
+    /**
+     * 是否使用包围盒
+     */
     @property
     setRound:boolean = false;
+    /**
+     * 是否控制缩放
+     */
+    @property
+    setZoom:boolean = false;
     // LIFE-CYCLE CALLBACKS:
 
     // onLoad () {}
+    /**
+     * 目标缩放
+     */
     tageZoom: number = 1;
     private Controlled: boolean = false;
     start() {
@@ -94,8 +107,11 @@ export default class CameraFx extends cc.Component {
                 //         //this.tagerCamera.zoomRatio= 1/(vect2.mag()/100)
                 //     }
                 // }
-
-                 this.tagerCamera.zoomRatio += (this.tageZoom- this.tagerCamera.zoomRatio)*0.6*dt;
+                if(this.setZoom)
+                {
+                    this.tagerCamera.zoomRatio += (this.tageZoom- this.tagerCamera.zoomRatio)*0.6*dt;
+                }
+                 
                 // //console.log(this.tagerCamera.zoomRatio)
             }
         }
