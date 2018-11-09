@@ -119,7 +119,7 @@ export default class GlobalTime extends cc.Component {
         if(!this._instantiation){this._instantiation = cc.find("System/GlobalTime").getComponent(GlobalTime)}
         return this._instantiation;
     }
-    coroutines:CoroutinesProgram[] = new Array();
+    private coroutines:CoroutinesProgram[] = new Array();
     Coroutines(iteralbe:IterableIterator<CoroutinesType>)
     {
         var co:CoroutinesProgram = new CoroutinesProgram(iteralbe);

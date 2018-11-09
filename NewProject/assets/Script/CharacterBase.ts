@@ -5,6 +5,7 @@ const {ccclass, property} = cc._decorator;
 */
 @ccclass
 export default class CharacterBase extends cc.Component implements ITouchEvent {
+    
     onTouch(touch:cc.Event.EventTouch,sourceNode:cc.Node)
     {
 
